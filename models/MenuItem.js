@@ -14,7 +14,6 @@ const menuItemSchema = new mongoose.Schema({
     ingredients: {
         type: String,
         required: true,
-        unique: true,
     },
     created: {
         type: Date,
