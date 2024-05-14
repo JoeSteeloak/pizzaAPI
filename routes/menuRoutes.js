@@ -8,6 +8,7 @@ require("dotenv").config();
 //Menu item model
 const MenuItem = require("../models/MenuItem");
 
+//CREATE
 //Add a new menu item
 router.post("/register", authenticateToken, async (req, res) => {
     try {
@@ -35,7 +36,8 @@ router.post("/register", authenticateToken, async (req, res) => {
     }
 })
 
-//Hämta meny från databasen
+//READ
+//Hämta hela menyn från databasen
 router.get("/getmenu", async (req, res) => {
     try {
         let result = await MenuItem.find({});
@@ -46,6 +48,20 @@ router.get("/getmenu", async (req, res) => {
     }
 });
 
+//READ
+//Hämta en maträtt på menyn från databasen
+router.get("/getmenu/:foodname", async (req, res) => {
+    try {
+        const foodname = req.params.foodname;
+        let result = await MenuItem.findOne({ foodname: foodname});
+
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+});
+
+//DELETE
 //Ta bort från menyn i databasen
 router.delete("/deletemenu/:foodname", authenticateToken, async (req, res) => {
     try {
@@ -62,6 +78,7 @@ router.delete("/deletemenu/:foodname", authenticateToken, async (req, res) => {
     }
 });
 
+//UPDATE
 // Uppdatera en maträtt i menyn i databasen
 router.put("/updatemenu/:foodname", authenticateToken, async (req, res) => {
     try {
