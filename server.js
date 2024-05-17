@@ -2,7 +2,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
-const menuRoutes = require("./routes/menuRoutes")
+const menuRoutes = require("./routes/menuRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const jwt = require("jsonwebtoken");
 const cors = require('cors');
 require("dotenv").config();
@@ -15,6 +16,7 @@ app.use(cors());
 // Routes
 app.use("/api", authRoutes);
 app.use("/menu", menuRoutes);
+app.use("/message", messageRoutes);
 
 // protected routes
 app.get("/api/protected", authenticateToken, (req, res) => {
