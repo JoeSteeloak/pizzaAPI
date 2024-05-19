@@ -16,13 +16,13 @@ router.post("/", async (req, res) => {
 
         //check input
         if (!name || !phonenumber || !numberOfGuests || !date) {
-            return res.status(400).json({ error: "Invalid input, send name, phonenumber, number of guests, and date"});
+            return res.status(400).json({ error: "Fyll i alla fälten, tack"});
         }
         // Correct - save message
         const booking = new Booking({ name, phonenumber, numberOfGuests, date });
         await booking.save();
 
-        res.status(201).json({message: "Booking received"});
+        res.status(201).json({message: "Bokning reserverad!"});
 
     } catch (error) {
         res.status(500).json({ error: "Server error"});
